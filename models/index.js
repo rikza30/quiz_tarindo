@@ -19,4 +19,6 @@ db.Sequlize = Sequlize;
 db.sequelize = sequelize;
 
 db.quizzes = require('./quiz')(sequelize, Sequlize);
+db.content = require('./content')(sequelize, Sequlize);
+
 module.exports = db;

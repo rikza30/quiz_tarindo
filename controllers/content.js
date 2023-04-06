@@ -1,5 +1,5 @@
 const db = require("../models")
-const Content = db.contentapp;
+const Content = db.content;
 
 
 // Menambahkan Content
@@ -25,11 +25,19 @@ exports.create = async(req, res) => {
 // Menampilkan semua data Content
 exports.getAll = async(req, res) => {
     try {
-        const quizzes = await Content.findAll()
-        res.json({
-            message: "Konten berhasil ditampilkan",
-            data: quizzes,
-        });
+        const data = await Content.findAll()
+        if (data.length == 0){
+            res.json({
+                message: "Konten tidak ditemukan",
+                data: null,
+            });
+        }  
+        else{
+            res.json({
+                message: "Konten Berhasil Ditampilkan",
+                data: data,
+            });
+        }
     } catch (error) {
         res.status(500).json({
             message: error.message || "Kontent gagal ditampilkan",
