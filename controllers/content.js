@@ -15,10 +15,6 @@ exports.create = async(req, res) => {
             message: error.message,
             data: null,
         });
-    } finally {
-        res.json({
-            message: "Kontent gagal dibuat"
-        })
     }
 }
 
@@ -100,3 +96,18 @@ exports.findOne = async (req, res) => {
         });
     }
 };
+
+//Menampilkan data berdasarkan provinsi
+exports.getByProvinsi = async (req, res) => {
+    const nameProvinsi = req.params.provinsi
+    const content = await Content.findAll({
+        where : {
+            provinsi: nameProvinsi,
+        }
+    })
+    res.json({
+        message: `Content retrieved successfully with provnsi=${nameProvinsi}.`,
+        data : content
+    });
+  };
+  
